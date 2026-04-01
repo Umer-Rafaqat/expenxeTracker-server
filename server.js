@@ -4,12 +4,6 @@ const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
 
-console.log("=== ENV CHECK ===");
-console.log("MONGO_URI:", JSON.stringify(process.env.MONGO_URI));
-console.log("JWT_SECRET:", process.env.JWT_SECRET ? "SET" : "MISSING");
-console.log("PORT:", process.env.PORT);
-console.log("=================");
-
 const authRoutes = require("./routes/authRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
