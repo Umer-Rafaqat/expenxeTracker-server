@@ -12,7 +12,14 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173", // Local dev
+  "http://localhost:3000", // Alternative local port
+  "https://expense-tracker-client-ten-psi.vercel.app", // Production Vercel
+  process.env.CLIENT_ORIGIN, // Any additional origin from env
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 // Serve uploaded files
@@ -25,7 +32,9 @@ app.use("/api/v1/expense", expenseRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 
 // Health check
-app.get("/", (req, res) => res.json({ success: true, message: "Expense Tracker API running" }));
+app.get("/", (req, res) =>
+  res.json({ success: true, message: "Expense Tracker API running" }),
+);
 
 const PORT = process.env.PORT || 8000;
 
