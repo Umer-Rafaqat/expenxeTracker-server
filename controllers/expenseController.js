@@ -41,7 +41,7 @@ exports.downloadExcel = async (req, res) => {
 
     sheet.columns = [
       { header: "Category", key: "category", width: 25 },
-      { header: "Amount ($)", key: "amount", width: 15 },
+      { header: "Amount (PKR)", key: "amount", width: 15 },
       { header: "Date", key: "date", width: 20 },
       { header: "Description", key: "description", width: 35 },
     ];
