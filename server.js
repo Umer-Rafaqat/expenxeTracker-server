@@ -12,20 +12,7 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
-    const allowed = [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      process.env.CLIENT_ORIGIN,
-    ].filter(Boolean);
-    if (allowed.includes(origin)) return callback(null, true);
-    callback(new Error(`CORS blocked: ${origin}`));
-  },
-  credentials: true,
-}));
+app.use(cors({ origin: "*", credentials: false }));
 app.use(express.json());
 
 // Serve uploaded files
